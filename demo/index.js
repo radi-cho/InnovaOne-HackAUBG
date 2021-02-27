@@ -15,6 +15,10 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
+function cleanUI() {
+    document.getElementById("actions").style.display = "none";
+}
+
 function initMapDemo() {
     heatmapData = new google.maps.MVCArray([])
     const seattle = new google.maps.LatLng(47.6193995, -122.3410557);
@@ -28,7 +32,12 @@ function initMapDemo() {
         data: heatmapData
     });
 
+    map.addListener("click", (ev) => {
+        sampleDataset.push([ev.latLng.lat(), ev.latLng.lng()]);
+    });
+
     heatmap.setMap(map);
+    cleanUI();
 }
 
 function loadHeatMap() {
@@ -36,6 +45,8 @@ function loadHeatMap() {
     demoData.forEach(loc => {
         heatmapData.push({ location: new google.maps.LatLng(loc[0], loc[1]), weight: 0.07 });
     });
+
+    document.getElementById("actions").style.display = "inherit";
 }
 
 function initMapFirebase() {
@@ -59,17 +70,17 @@ function initMapFirebase() {
             heatmapDataFirebase.push({ location: new google.maps.LatLng(data[geo].lat, data[geo].lng), weight: 0.9 });
         })
     });
+
+    cleanUI();
 }
 
 function initMap() {
-    const seattle = new google.maps.LatLng(35,-30);
+    const world = new google.maps.LatLng(35,-30);
     map = new google.maps.Map(document.getElementById('map'), {
-        center: seattle,
+        center: world,
         zoom: 3,
         mapTypeId: 'satellite'
     });
 
-    map.addListener("click", (ev) => {
-        sampleDataset.push([ev.latLng.lat(), ev.latLng.lng()]);
-    });
+    cleanUI();
 }
