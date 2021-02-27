@@ -305,7 +305,7 @@ class _TestAppState extends State<TestApp> {
                     return InputDecorator(
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
-                            labelStyle: TextStyle(color: Colors.amberAccent, fontSize: 20.0),
+                            labelStyle: TextStyle(color: Colors.teal, fontSize: 20.0),
                             labelText: action.command
                         ),
                         child: new Text(action.result.toString(), style: TextStyle(color: Colors.white))

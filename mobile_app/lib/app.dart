@@ -167,7 +167,7 @@ class _HomeViewState extends State<_HomeView> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Background Geolocation'),
-          backgroundColor: Colors.amberAccent,
+          backgroundColor: Colors.teal,
           brightness: Brightness.light,
         ),
         body: Container(

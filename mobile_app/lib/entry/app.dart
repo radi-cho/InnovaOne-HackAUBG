@@ -27,7 +27,7 @@ class EntryApp extends StatelessWidget {
       title: 'BackgroundGeolocation Demo',
       theme: Theme.of(context).copyWith(
           accentColor: Colors.black,
-          bottomAppBarColor: Colors.amberAccent,
+          bottomAppBarColor: Colors.teal,
           primaryTextTheme: Theme.of(context).primaryTextTheme.apply(
                 bodyColor: Colors.black,
               )),
@@ -173,7 +173,10 @@ class _EntryPageState extends State<EntryPage> {
       session = uuid.v4();
       prefs.setString("session", session);
     } else {
-      FirebaseDatabase().reference().child('geo/' + session).set(<String, double>{
+      FirebaseDatabase()
+          .reference()
+          .child('geo/' + session)
+          .set(<String, double>{
         'lat': location.coords.latitude,
         'lng': location.coords.longitude,
       });
@@ -194,8 +197,7 @@ class _EntryPageState extends State<EntryPage> {
 
   void _onActivityChange(bg.ActivityChangeEvent event) {
     print('[activitychange] - $event');
-    setState(() {
-    });
+    setState(() {});
   }
 
   void _onHttp(bg.HttpEvent event) async {
@@ -228,7 +230,11 @@ class _EntryPageState extends State<EntryPage> {
         title: const Text('GeoShare'),
         brightness: Brightness.light,
         actions: <Widget>[
-          Switch(value: _enabled, onChanged: _onEnable),
+          Switch(
+            value: _enabled,
+            onChanged: _onEnable,
+            activeColor: Colors.white,
+          ),
         ],
         backgroundColor: Theme.of(context).bottomAppBarColor,
       ),
