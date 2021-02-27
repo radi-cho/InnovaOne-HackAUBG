@@ -49,20 +49,23 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
   bool _isMoving;
   bool _enabled;
   String _content;
-  String _session;
 
   @override
   void initState() {
-    var uuid = Uuid();
     super.initState();
     _content = "    Enable the switch to begin tracking.";
     _isMoving = false;
     _enabled = false;
     _content = '';
-    _session = uuid.v4();
     _initPlatformState();
     _onEnable(true);
     _onChangePace();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // FirebaseDatabase().reference().child('geo/' + _session).remove();
   }
 
   Future<Null> _initPlatformState() async {
@@ -164,12 +167,19 @@ class _HelloWorldPageState extends State<HelloWorldPage> {
   //
 
   void _onLocation(bg.Location location) async {
-    print('[location] - $location');
+    var uuid = Uuid();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String session = prefs.getString("session");
 
-    FirebaseDatabase().reference().child('geo/' + _session).set(<String, double>{
-      'lat': location.coords.latitude,
-      'lng': location.coords.longitude,
-    });
+    if (session == null) {
+      session = uuid.v4();
+      prefs.setString("session", session);
+    } else {
+      FirebaseDatabase().reference().child('geo/' + session).set(<String, double>{
+        'lat': location.coords.latitude,
+        'lng': location.coords.longitude,
+      });
+    }
 
     setState(() {
       _content = encoder.convert(location.toMap());
