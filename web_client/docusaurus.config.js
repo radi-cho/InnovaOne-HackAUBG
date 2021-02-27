@@ -18,8 +18,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'docs/',
-          activeBasePath: 'docs',
+          href: '/app',
           label: 'Try it out',
           position: 'left',
         },
