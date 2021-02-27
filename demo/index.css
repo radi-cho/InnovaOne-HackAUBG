@@ -6,6 +6,10 @@
     padding: 0;
 }
 
+#actions {
+    display: none;
+}
+
 .card {
     margin: 3px;
 }
