@@ -14,7 +14,7 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
 import 'package:url_launcher/url_launcher.dart';
 
 import 'config/ENV.dart';
-import 'hello_world/app.dart';
+import 'entry/app.dart';
 
 class HomeApp extends StatefulWidget {
   @override
@@ -137,8 +137,8 @@ class _HomeViewState extends State<_HomeView> {
 
     Widget app;
     switch (appName) {
-      case HelloWorldApp.NAME:
-        app = new HelloWorldApp();
+      case EntryApp.NAME:
+        app = new EntryApp();
         break;
       default:
         return;
@@ -192,7 +192,7 @@ class _HomeViewState extends State<_HomeView> {
                               children: <Widget>[
                                 _buildApplicationButton('Hello World App',
                                     onPressed: () {
-                                  _onClickNavigate("hello_world");
+                                  _onClickNavigate("entry");
                                 }),
                                 _buildApplicationButton('Advanced App',
                                     onPressed: () {

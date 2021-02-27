@@ -17,8 +17,8 @@ import 'dart:convert';
 
 JsonEncoder encoder = new JsonEncoder.withIndent("     ");
 
-class HelloWorldApp extends StatelessWidget {
-  static const String NAME = 'hello_world';
+class EntryApp extends StatelessWidget {
+  static const String NAME = 'entry';
 
   // This widget is the root of your application.
   @override
@@ -31,21 +31,19 @@ class HelloWorldApp extends StatelessWidget {
           primaryTextTheme: Theme.of(context).primaryTextTheme.apply(
                 bodyColor: Colors.black,
               )),
-      home: new HelloWorldPage(),
+      home: new EntryPage(),
     );
   }
 }
 
-class HelloWorldPage extends StatefulWidget {
-  HelloWorldPage({Key key}) : super(key: key);
+class EntryPage extends StatefulWidget {
+  EntryPage({Key key}) : super(key: key);
 
   @override
-  _HelloWorldPageState createState() => new _HelloWorldPageState();
+  _EntryPageState createState() => new _EntryPageState();
 }
 
-class _HelloWorldPageState extends State<HelloWorldPage> {
-  Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
-
+class _EntryPageState extends State<EntryPage> {
   bool _isMoving;
   bool _enabled;
   String _content;

@@ -5,7 +5,7 @@ import 'package:flutter_background_geolocation/flutter_background_geolocation.da
     as bg;
 import 'package:background_fetch/background_fetch.dart';
 
-import 'hello_world/app.dart';
+import 'entry/app.dart';
 
 import 'config/env.dart';
 
@@ -114,7 +114,6 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Application selection:  Select the app to boot:
-  /// - HelloWorldAp
   /// - HomeApp
   ///
   SharedPreferences.getInstance().then((SharedPreferences prefs) {
@@ -131,12 +130,12 @@ void main() {
     }
 
     switch (appName) {
-      case HelloWorldApp.NAME:
-        runApp(new HelloWorldApp());
+      case EntryApp.NAME:
+        runApp(new EntryApp());
         break;
       default:
         // Default app.  Renders the application selector home page.
-        runApp(new HelloWorldApp());
+        runApp(new EntryApp());
     }
   });
 
