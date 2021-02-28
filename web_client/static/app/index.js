@@ -33,10 +33,11 @@ function initMapDemo() {
 
     map.addListener("click", (ev) => {
         demoData.push([ev.latLng.lat(), ev.latLng.lng()]);
-        heatmapData.push({ location: new google.maps.LatLng(ev.latLng.lat(), ev.latLng.lng()), weight: 0.07 });
+        heatmapData.push({ location: new google.maps.LatLng(ev.latLng.lat(), ev.latLng.lng()), weight: 0.1 });
         covidChecks();
         trafficLevels(true);
         crowdDynamics();
+        cleanUpTargets();
     });
 
     heatmap.setMap(map);
@@ -44,6 +45,7 @@ function initMapDemo() {
     covidChecks();
     trafficLevels(true);
     crowdDynamics();
+    cleanUpTargets();
 }
 
 function loadHeatMap() {
@@ -146,10 +148,19 @@ function trafficLevels(updateDOM) {
 }
 
 function crowdDynamics() {
-    let result = "";
+    let resultDOM = "";
     trafficLevels(false).forEach(el => {
-        if (el.status === "high") result += "<div>Unusual crowd density on <b>" + el.name + "</b>. Possibility of <span style='cursor: pointer; text-decoration: underline;' onclick=\"alert('Take action! Send a police team or order an inspection.')\" title=\"Take action!\">an incident, a protest or a carnival</span> happening.</div>";
+        if (el.status === "high") resultDOM += "<div>Unusual crowd density on <b>" + el.name + "</b>. Possibility of <span style='cursor: pointer; text-decoration: underline;' onclick=\"alert('Take action! Send a police team or order an inspection.')\" title=\"Take action!\">an incident, a protest or a carnival</span> happening.</div>";
     });
 
-    document.getElementById("crowd-dynamics").innerHTML = result;
+    document.getElementById("crowd-dynamics").innerHTML = resultDOM;
+}
+
+function cleanUpTargets() {
+    let result = "";
+    trafficLevels(false).forEach(el => {
+        if (el.status === "high" || el.status === "mild") result += el.name + "; ";
+    });
+
+    document.getElementById("cleanup-targets").innerHTML = "<span style='cursor: pointer; text-decoration: underline;' onclick=\"alert('Sending an inquiry to the pollution department.')\" title=\"Take action!\">" + result + "</span>";
 }
