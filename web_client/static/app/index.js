@@ -66,6 +66,7 @@ function initMapFirebase() {
     const geoDataRef = database.ref('geo/');
     geoDataRef.on('value', (snapshot) => {
         const data = snapshot.val();
+        while(heatmapDataFirebase.getLength() > 0) heatmapData.pop();
         Object.keys(data).forEach((geo) => {
             heatmapDataFirebase.push({ location: new google.maps.LatLng(data[geo].lat, data[geo].lng), weight: 0.9 });
         })
