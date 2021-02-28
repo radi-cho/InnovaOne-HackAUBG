@@ -36,7 +36,7 @@ module.exports = {
     },
     footer: {
       style: 'dark',
-      copyright: `Built with ❤️ by <a href="https://www.linkedin.com/in/radostin-cholakov-bb4422146/" target="_blank">Radi Cho</a>.`,
+      copyright: `Built with ❤️ by <a href="https://www.linkedin.com/in/radostin-cholakov-bb4422146/" target="_blank">Radi Cho</a> from the "InnovaOne - АзБуки.ML" team!`,
     },
   },
   presets: [

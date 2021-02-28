@@ -8,8 +8,8 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: 'Helpful for citizens',
+    imageUrl: 'img/1.png',
     description: (
       <>
         Docusaurus was designed from the ground up to be easily installed and
@@ -18,7 +18,7 @@ const features = [
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Crucial for city officials',
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
@@ -28,8 +28,8 @@ const features = [
     ),
   },
   {
-    title: 'Powered by React',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: 'Focused on Privacy',
+    imageUrl: 'img/3.png',
     description: (
       <>
         Extend or customize your website layout by reusing React. Docusaurus can
@@ -44,7 +44,7 @@ function Feature({imageUrl, title, description}) {
   return (
     <div className={clsx('col col--4', styles.feature)}>
       {imgUrl && (
-        <div className="text--center">
+        <div className="text--center" style={{height: 230}}>
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
