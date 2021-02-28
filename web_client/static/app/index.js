@@ -40,6 +40,7 @@ function initMapDemo() {
     cleanUI();
     covidChecks();
     trafficLevels(true);
+    crowdDynamics();
 }
 
 function loadHeatMap() {
@@ -112,24 +113,40 @@ function covidChecks() {
 function trafficLevels(updateDOM) {
     const targets = [
         { name: "9th Ave N", data: ave9 },
-        { name: "Denny Way Str", data: dennyWay }
+        { name: "Denny Way Str", data: dennyWay },
+        { name: "Dexter Ave N", data: dexterAve },
     ];
 
-    const acceptable = [100, 100];
+    const acceptable = [100, 100, 150];
     const currentLevels = targets.map(t => countRect(t.data));
 
-    if (updateDOM) {
-        const lines = currentLevels.map((lvl, i) => {
-            if (lvl > acceptable[i]) return 'Traffic levels for "' + targets[i].name + '": ' + "<b>High</b>";
-            if (lvl <= acceptable[i] && lvl > acceptable[i] * 0.7) return 'Traffic levels for "' + targets[i].name + '": ' + "<b>Mild</b>";
-            if (lvl < acceptable[i] && lvl <= acceptable[i] * 0.7) return 'Traffic levels for "' + targets[i].name + '": ' + "<b>Low</b>";
-        });
+    let resultElements = "";
+    const lines = currentLevels.map((lvl, i) => {
+        if (lvl > acceptable[i]) {
+            resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>High</b></li>";
+            return Object.assign(targets[i], {status: "high"});
+        }
 
-        let resultElements = "";
-        lines.forEach(line => resultElements += "<li>" + line + "</li>");
+        if (lvl <= acceptable[i] && lvl > acceptable[i] * 0.7) {
+            resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>Mild</b></li>";
+            return Object.assign(targets[i], {status: "mild"});
+        }
 
-        document.getElementById("traffic-list").innerHTML = resultElements;
-    }
+        if (lvl < acceptable[i] && lvl <= acceptable[i] * 0.7) {
+            resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>Low</b></li>";
+            return Object.assign(targets[i], {status: "low"});
+        }
+    });
+    
+    if (updateDOM) document.getElementById("traffic-list").innerHTML = resultElements;
+    return lines;
+}
 
-    return currentLevels;
+function crowdDynamics() {
+    let result = "";
+    trafficLevels(false).forEach(el => {
+        if (el.status === "high") result += "<div>Unusual crowd density on <b>" + el.name + "</b>. Possibility of <span style='cursor: pointer; text-decoration: underline;' onclick=\"alert('Take action! Send a police team or order an inspection.')\" title=\"Take action!\">an incident, a protest or a carnival</span> happening.</div>";
+    });
+
+    document.getElementById("crowd-dynamics").innerHTML = result;
 }
