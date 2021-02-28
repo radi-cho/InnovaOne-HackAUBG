@@ -10,6 +10,10 @@
     display: none;
 }
 
+#panels {
+    display: none;
+}
+
 .card {
     margin: 3px;
 }

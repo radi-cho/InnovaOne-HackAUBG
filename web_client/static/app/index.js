@@ -15,6 +15,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 function cleanUI() {
+    document.getElementById("panels").style.display = "none";
     document.getElementById("actions").style.display = "none";
 }
 
@@ -54,7 +55,8 @@ function loadHeatMap() {
         heatmapData.push({ location: new google.maps.LatLng(loc[0], loc[1]), weight: 0.07 });
     });
 
-    document.getElementById("actions").style.display = "inherit";
+    document.getElementById("panels").style.display = "inherit";
+    document.getElementById("actions").style.display = "inline-block";
 }
 
 function initMapFirebase() {
@@ -129,20 +131,20 @@ function trafficLevels(updateDOM) {
     const lines = currentLevels.map((lvl, i) => {
         if (lvl > acceptable[i]) {
             resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>High</b></li>";
-            return Object.assign(targets[i], {status: "high"});
+            return Object.assign(targets[i], { status: "high" });
         }
 
         if (lvl <= acceptable[i] && lvl > acceptable[i] * 0.7) {
             resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>Mild</b></li>";
-            return Object.assign(targets[i], {status: "mild"});
+            return Object.assign(targets[i], { status: "mild" });
         }
 
         if (lvl < acceptable[i] && lvl <= acceptable[i] * 0.7) {
             resultElements += '<li>Traffic levels for "' + targets[i].name + '": ' + "<b>Low</b></li>";
-            return Object.assign(targets[i], {status: "low"});
+            return Object.assign(targets[i], { status: "low" });
         }
     });
-    
+
     if (updateDOM) document.getElementById("traffic-list").innerHTML = resultElements;
     return lines;
 }
@@ -163,4 +165,14 @@ function cleanUpTargets() {
     });
 
     document.getElementById("cleanup-targets").innerHTML = "<span style='cursor: pointer; text-decoration: underline;' onclick=\"alert('Sending an inquiry to the pollution department.')\" title=\"Take action!\">" + result + "</span>";
+}
+
+function exportData() {
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(demoData));
+    var downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "GeoShare_data.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
 }
