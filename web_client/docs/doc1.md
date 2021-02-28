@@ -5,4 +5,4 @@ sidebar_label: Our Mobile app
 slug: /
 ---
 
-Get our mobile tracker app here: [Download](http://localhost:3000/mobile/app-debug.apk)
+Get our mobile tracker app here: [Download](/mobile/app-debug.apk)
