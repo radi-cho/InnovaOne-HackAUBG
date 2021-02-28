@@ -1,4 +1,3 @@
-const sampleDataset = [];
 let heatmapData;
 let map;
 
@@ -33,7 +32,11 @@ function initMapDemo() {
     });
 
     map.addListener("click", (ev) => {
-        sampleDataset.push([ev.latLng.lat(), ev.latLng.lng()]);
+        demoData.push([ev.latLng.lat(), ev.latLng.lng()]);
+        heatmapData.push({ location: new google.maps.LatLng(ev.latLng.lat(), ev.latLng.lng()), weight: 0.07 });
+        covidChecks();
+        trafficLevels(true);
+        crowdDynamics();
     });
 
     heatmap.setMap(map);
@@ -117,7 +120,7 @@ function trafficLevels(updateDOM) {
         { name: "Dexter Ave N", data: dexterAve },
     ];
 
-    const acceptable = [100, 100, 150];
+    const acceptable = [120, 105, 150];
     const currentLevels = targets.map(t => countRect(t.data));
 
     let resultElements = "";
