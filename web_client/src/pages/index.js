@@ -12,8 +12,7 @@ const features = [
     imageUrl: 'img/1.png',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Providing helpful insights and tools to the average user for free so they have insentive to use our services.
       </>
     ),
   },
@@ -22,8 +21,7 @@ const features = [
     imageUrl: 'img/undraw_docusaurus_tree.svg',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Aggregating user data and public resources, analyzing them and applying ML to create a powerful city management dashboard.
       </>
     ),
   },
@@ -32,19 +30,18 @@ const features = [
     imageUrl: 'img/3.png',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        All data is anonymous and encrypted. In the future we're planning on implementing a decentralized blockchain solution as well.
       </>
     ),
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
       {imgUrl && (
-        <div className="text--center" style={{height: 230}}>
+        <div className="text--center" style={{ height: 230 }}>
           <img className={styles.featureImage} src={imgUrl} alt={title} />
         </div>
       )}
@@ -56,7 +53,7 @@ function Feature({imageUrl, title, description}) {
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
