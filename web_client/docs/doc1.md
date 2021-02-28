@@ -1,8 +1,8 @@
 ---
 id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: Our Mobile app
+sidebar_label: Our Mobile app
 slug: /
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+Get our mobile tracker app here: [Download](http://localhost:3000/mobile/app-debug.apk)

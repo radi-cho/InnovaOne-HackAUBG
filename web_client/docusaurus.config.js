@@ -23,6 +23,11 @@ module.exports = {
           position: 'left',
         },
         {
+          to: '/docs',
+          label: 'Get mobile app',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/radi-cho/InnovaOne-HackAUBG',
           label: 'GitHub',
           position: 'right',
